@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>AppFlowy</title>
+    <title>Amrut Workspace</title>
   </head>
   <body>
     <script>
@@ -22,11 +22,11 @@
       const getFallbackLink = () => {
 
         if (deviceType === 'iOS') {
-          return 'https://testflight.apple.com/join/6CexvkDz';
+          return 'https://apps.apple.com/app/amrut-workspace';
         } else if (deviceType === 'Android') {
-          return 'https://play.google.com/store/apps/details?id=io.appflowy.appflowy';
+          return 'https://play.google.com/store/apps/details?id=com.chandorkar.amrutworkspace';
         } else {
-          return 'https://appflowy.io/download/#pop';
+          return 'https://amrutworkspace.com/download';
         }
       };
 
@@ -39,14 +39,14 @@
         }
       }
 
-      const APPFLOWY_SCHEME = 'appflowy-flutter://';
+      const AMRUT_SCHEME = 'amrutworkspace://';
 
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none'
-      iframe.src = APPFLOWY_SCHEME;
+      iframe.src = AMRUT_SCHEME;
 
       const openSchema = () => {
-        if (isMobile) return window.location.href = APPFLOWY_SCHEME;
+        if (isMobile) return window.location.href = AMRUT_SCHEME;
         document.body.appendChild(iframe);
         setTimeout(() => {
           document.body.removeChild(iframe);
@@ -118,8 +118,8 @@
       });
     </script>
 
-    <h1>Opening AppFlowy</h1>
-    <p>If AppFlowy does not open, you can click <a id="open-appflowy" href="#">here</a> to launch the app.</p>
-    <p>If AppFlowy is not installed, you can <a id="download-link" href="#">download AppFlowy manually</a>.</p>
+    <h1>Opening Amrut Workspace</h1>
+    <p>If Amrut Workspace does not open, you can click <a id="open-appflowy" href="#">here</a> to launch the app.</p>
+    <p>If Amrut Workspace is not installed, you can <a id="download-link" href="#">download Amrut Workspace manually</a>.</p>
   </body>
 </html>
