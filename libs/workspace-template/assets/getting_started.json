@@ -3,7 +3,7 @@
   "children": [
     {
       "type": "heading",
-      "data": { "level": 2, "delta": [{ "insert": "Welcome to AppFlowy" }] }
+      "data": { "level": 2, "delta": [{ "insert": "Welcome to Amrut Workspace" }] }
     },
     {
       "type": "heading",
@@ -33,7 +33,7 @@
               { "insert": " " },
               {
                 "insert": "link",
-                "attributes": { "href": "https://appflowy.io/download" }
+                "attributes": { "href": "https://amrutworkspace.io/download" }
               }
             ]
           }
@@ -119,7 +119,7 @@
       "data": {
         "delta": [
           {
-            "insert": "❤️Love AppFlowy and open source? Follow our latest product updates:"
+            "insert": "❤️Love Amrut Workspace and open source? Follow our latest product updates:"
           }
         ]
       }
@@ -131,9 +131,9 @@
         "delta": [
           {
             "insert": "Twitter",
-            "attributes": { "href": "https://twitter.com/appflowy" }
+            "attributes": { "href": "https://twitter.com/amrutworkspace" }
           },
-          { "insert": ": @appflowy" }
+          { "insert": ": @amrutworkspace" }
         ]
       }
     },
@@ -144,9 +144,9 @@
         "delta": [
           {
             "insert": "Reddit",
-            "attributes": { "href": "https://www.reddit.com/r/AppFlowy/" }
+            "attributes": { "href": "https://www.reddit.com/r/Amrut Workspace/" }
           },
-          { "insert": ": r/appflowy" }
+          { "insert": ": r/amrutworkspace" }
         ]
       }
     },
@@ -158,7 +158,7 @@
           {
             "insert": "Github",
             "attributes": {
-              "href": "https://github.com/AppFlowy-IO/AppFlowy"
+              "href": "https://github.com/Amrut Workspace-IO/Amrut Workspace"
             }
           }
         ]

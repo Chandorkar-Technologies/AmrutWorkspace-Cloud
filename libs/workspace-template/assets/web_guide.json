@@ -7,12 +7,12 @@
         "level": 1,
         "delta": [
           {
-            "insert": "AppFlowy is right in "
+            "insert": "Amrut Workspace is right in "
           },
           {
             "insert": "your browser",
             "attributes": {
-              "href": "https://appflowy.com/"
+              "href": "https://amrutworkspace.com/"
             }
           }
         ]
@@ -293,7 +293,7 @@
         "image_type": 1,
         "width": 553.7578125,
         "align": "left",
-        "url": "https://beta.appflowy.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/P5aRDW-HGm6vk4gjZg8w6jgD_z2yE402OuI1uutNN3A=.png"
+        "url": "https://beta.amrutworkspace.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/P5aRDW-HGm6vk4gjZg8w6jgD_z2yE402OuI1uutNN3A=.png"
       }
     },
     {
@@ -315,7 +315,7 @@
     {
       "type": "image",
       "data": {
-        "url": "https://beta.appflowy.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/TRYYtsRlWsmEYPSsIkpYs0uawhrtj3W52kg0VgwZ2J0=.png",
+        "url": "https://beta.amrutworkspace.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/TRYYtsRlWsmEYPSsIkpYs0uawhrtj3W52kg0VgwZ2J0=.png",
         "align": "center",
         "image_type": 1
       }
@@ -340,7 +340,7 @@
       "type": "image",
       "data": {
         "image_type": 1,
-        "url": "https://beta.appflowy.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/JimDFWOY8_ATw20LkDuBg68TwkwtmSysbRbMd2eNjZ0=.png",
+        "url": "https://beta.amrutworkspace.cloud/api/file_storage/c29fafc4-b7c0-4549-8702-71339b0fd9ea/v1/blob/735c7c28%2D33a0%2D4e9f%2D92e6%2D089630656063/JimDFWOY8_ATw20LkDuBg68TwkwtmSysbRbMd2eNjZ0=.png",
         "align": "center"
       }
     },
@@ -371,7 +371,7 @@
           {
             "insert": "guide",
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/shortcuts"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/shortcuts"
             }
           }
         ]
@@ -387,7 +387,7 @@
           {
             "insert": "reference",
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/markdown"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/markdown"
             }
           }
         ]

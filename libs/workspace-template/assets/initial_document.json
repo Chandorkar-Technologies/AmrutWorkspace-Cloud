@@ -7,7 +7,7 @@
       "data": {
         "delta": [
           {
-            "insert": "Welcome to AppFlowy!"
+            "insert": "Welcome to Amrut Workspace!"
           }
         ],
         "level": 1
@@ -318,7 +318,7 @@
           },
           {
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/shortcuts"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/shortcuts"
             },
             "insert": "guide"
           }
@@ -334,7 +334,7 @@
           },
           {
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/markdown"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/markdown"
             },
             "insert": "reference"
           }
@@ -486,11 +486,11 @@
       "data": {
         "delta": [
           {
-            "insert": "\nLike AppFlowy? Follow us:\n"
+            "insert": "\nLike Amrut Workspace? Follow us:\n"
           },
           {
             "attributes": {
-              "href": "https://github.com/AppFlowy-IO/AppFlowy"
+              "href": "https://github.com/Amrut Workspace-IO/Amrut Workspace"
             },
             "insert": "GitHub"
           },
@@ -499,16 +499,16 @@
           },
           {
             "attributes": {
-              "href": "https://twitter.com/appflowy"
+              "href": "https://twitter.com/amrutworkspace"
             },
             "insert": "Twitter"
           },
           {
-            "insert": ": @appflowy\n"
+            "insert": ": @amrutworkspace\n"
           },
           {
             "attributes": {
-              "href": "https://blog-appflowy.ghost.io/"
+              "href": "https://blog-amrutworkspace.ghost.io/"
             },
             "insert": "Newsletter"
           },

@@ -5,7 +5,7 @@
       "type": "heading",
       "data": {
         "level": 1,
-        "delta": [{ "insert": "AppFlowy Desktop on macOS, Windows, and Linux" }]
+        "delta": [{ "insert": "Amrut Workspace Desktop on macOS, Windows, and Linux" }]
       }
     },
     {
@@ -14,7 +14,7 @@
         "delta": [
           {
             "insert": "Download",
-            "attributes": { "href": "https://appflowy.io/download" }
+            "attributes": { "href": "https://amrutworkspace.io/download" }
           },
           { "insert": " " }
         ]
@@ -173,7 +173,7 @@
           {
             "insert": "guide",
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/shortcuts"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/shortcuts"
             }
           }
         ]
@@ -187,7 +187,7 @@
           {
             "insert": "reference",
             "attributes": {
-              "href": "https://appflowy.gitbook.io/docs/essential-documentation/markdown"
+              "href": "https://amrutworkspace.gitbook.io/docs/essential-documentation/markdown"
             }
           }
         ]
@@ -244,11 +244,11 @@
         "images": [
           {
             "type": 1,
-            "url": "https://github.com/AppFlowy-IO/AppFlowy/blob/main/doc/readme/desktop_guide_1.jpg?raw=true"
+            "url": "https://github.com/Amrut Workspace-IO/Amrut Workspace/blob/main/doc/readme/desktop_guide_1.jpg?raw=true"
           },
           {
             "type": 1,
-            "url": "https://github.com/AppFlowy-IO/AppFlowy/blob/main/doc/readme/desktop_guide_2.jpg?raw=true"
+            "url": "https://github.com/Amrut Workspace-IO/Amrut Workspace/blob/main/doc/readme/desktop_guide_2.jpg?raw=true"
           }
         ]
       }
