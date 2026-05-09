@@ -53,7 +53,7 @@
         }, 1000);
       };
 
-      const openAppFlowy = (force) => {
+      const openAmrutWorkspace = (force) => {
         openSchema();
 
         if (force) return;
@@ -103,9 +103,9 @@
 
       };
       document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById('open-appflowy').addEventListener('click', (e) => {
+        document.getElementById('open-amrut-workspace').addEventListener('click', (e) => {
           e.preventDefault();
-          openAppFlowy(true);
+          openAmrutWorkspace(true);
         });
 
         document.getElementById('download-link').addEventListener('click', (e) => {
@@ -113,13 +113,13 @@
           window.open(getFallbackLink(), '_current');
         });
 
-        openAppFlowy();
+        openAmrutWorkspace();
 
       });
     </script>
 
     <h1>Opening Amrut Workspace</h1>
-    <p>If Amrut Workspace does not open, you can click <a id="open-appflowy" href="#">here</a> to launch the app.</p>
+    <p>If Amrut Workspace does not open, you can click <a id="open-amrut-workspace" href="#">here</a> to launch the app.</p>
     <p>If Amrut Workspace is not installed, you can <a id="download-link" href="#">download Amrut Workspace manually</a>.</p>
   </body>
 </html>
