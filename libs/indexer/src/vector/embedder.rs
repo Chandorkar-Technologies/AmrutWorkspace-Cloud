@@ -49,7 +49,18 @@ pub fn get_open_ai_config() -> (Option<OpenAIConfig>, Option<AzureConfig>) {
 }
 
 fn open_ai_config() -> Option<OpenAIConfig> {
-  get_env_var_opt("AI_OPENAI_API_KEY").map(|v| OpenAIConfig::default().with_api_key(v))
+  // Support Groq OpenAI-compatible API via AI_OPENAI_API_BASE
+  // If set, points to e.g. https://api.groq.com/openai/v1
+  // Also supports Google Gemini via vertex AI endpoints
+  if let Some(api_key) = get_env_var_opt("AI_OPENAI_API_KEY") {
+    let mut config = OpenAIConfig::default().with_api_key(api_key);
+    if let Some(base_url) = get_env_var_opt("AI_OPENAI_API_BASE") {
+      info!("Using OpenAI-compatible API at: {}", base_url);
+      config = config.with_api_base(base_url);
+    }
+    return Some(config);
+  }
+  None
 }
 
 fn azure_open_ai_config() -> Option<AzureConfig> {
