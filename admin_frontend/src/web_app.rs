@@ -7,15 +7,15 @@ use crate::ext::api::{
   verify_token_cloud,
 };
 use crate::models::{LoginParams, OAuthLoginAction, WebAppOAuthLoginRequest};
-use crate::session::{self, new_session_cookie, UserSession};
+use crate::session::{self, UserSession, new_session_cookie};
 use askama::Template;
 use axum::extract::{Path, Query, State};
 use axum::response::{IntoResponse, Redirect, Result};
-use axum::{response::Html, routing::get, Router};
+use axum::{Router, response::Html, routing::get};
 use axum_extra::extract::CookieJar;
 use gotrue_entity::dto::User;
 
-use crate::{templates, AppState};
+use crate::{AppState, templates};
 
 static DEFAULT_OAUTH_REDIRECT_TO_WITHOUT_PREFIX: &str = "/web/login-callback";
 
@@ -34,8 +34,8 @@ fn page_router() -> Router<AppState> {
     .route("/payment-success", get(payment_success_handler))
     .route("/login-callback-query", get(login_callback_query_handler))
     .route(
-      "/open-appflowy-or-download",
-      get(open_appflowy_or_download_handler),
+      "/open-amrut-or-download",
+      get(open_amrut_or_download_handler),
     )
     .route("/home", get(home_handler))
     .route("/admin/home", get(admin_home_handler))
@@ -63,8 +63,8 @@ fn component_router() -> Router<AppState> {
     .route("/admin/sso/:sso_provider_id", get(admin_sso_detail_handler))
 }
 
-async fn open_appflowy_or_download_handler() -> Result<Html<String>, WebAppError> {
-  render_template(templates::OpenAppFlowyOrDownload {})
+async fn open_amrut_or_download_handler() -> Result<Html<String>, WebAppError> {
+  render_template(templates::OpenAmrutOrDownload {})
 }
 
 async fn login_callback_handler() -> Result<Html<String>, WebAppError> {
@@ -95,12 +95,13 @@ async fn login_callback_query_handler(
               query.error_description
             );
             let redirect_url = format!(
-                "https://appflowy.io/invitation/expired?workspace_name={}&workspace_icon={}&user_name={}&user_icon={}&workspace_member_count={}",
-                query.workspace_name.unwrap_or_default(),
-                query.workspace_icon.unwrap_or_default(),
-                query.user_name.unwrap_or_default(),
-                query.user_icon.unwrap_or_default(),
-                query.workspace_member_count.unwrap_or_default());
+              "https://amrutworkspace.com/invitation/expired?workspace_name={}&workspace_icon={}&user_name={}&user_icon={}&workspace_member_count={}",
+              query.workspace_name.unwrap_or_default(),
+              query.workspace_icon.unwrap_or_default(),
+              query.user_name.unwrap_or_default(),
+              query.user_icon.unwrap_or_default(),
+              query.workspace_member_count.unwrap_or_default()
+            );
 
             let expired_html = render_template(templates::Redirect { redirect_url })?;
             return Ok(expired_html.into_response());
@@ -157,7 +158,7 @@ async fn login_callback_query_handler(
             .iter()
             .find(|w| w.invite_id.to_string() == invite_id);
           if found.is_some() {
-            let open_or_dl_html = render_template(templates::OpenAppFlowyOrDownload {})?;
+            let open_or_dl_html = render_template(templates::OpenAmrutOrDownload {})?;
             return Ok((jar, open_or_dl_html).into_response());
           }
         }
@@ -171,16 +172,17 @@ async fn login_callback_query_handler(
         {
           tracing::error!("accepting workspace invitation: {:?}", err);
           let redirect_url = format!(
-            "https://appflowy.io/invitation/expired?workspace_name={}&workspace_icon={}&user_name={}&user_icon={}&workspace_member_count={}",
+            "https://amrutworkspace.com/invitation/expired?workspace_name={}&workspace_icon={}&user_name={}&user_icon={}&workspace_member_count={}",
             query.workspace_name.unwrap_or_default(),
             query.workspace_icon.unwrap_or_default(),
             query.user_name.unwrap_or_default(),
             query.user_icon.unwrap_or_default(),
-            query.workspace_member_count.unwrap_or_default());
+            query.workspace_member_count.unwrap_or_default()
+          );
           let redirect_html = render_template(templates::Redirect { redirect_url })?;
           return Ok(redirect_html.into_response());
         };
-        let open_or_dl_html = render_template(templates::OpenAppFlowyOrDownload {})?;
+        let open_or_dl_html = render_template(templates::OpenAmrutOrDownload {})?;
         Ok((jar, open_or_dl_html).into_response())
       },
     },

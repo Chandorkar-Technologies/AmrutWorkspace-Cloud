@@ -11,8 +11,8 @@ pub struct Redirect {
 }
 
 #[derive(Template)]
-#[template(path = "pages/open_appflowy_or_download.html")]
-pub struct OpenAppFlowyOrDownload {}
+#[template(path = "pages/open_amrut_or_download.html")]
+pub struct OpenAmrutOrDownload {}
 
 #[derive(Template)]
 #[template(path = "pages/login_callback.html")]

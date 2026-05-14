@@ -2,11 +2,11 @@ use std::collections::HashMap;
 
 use anyhow::Error;
 use async_trait::async_trait;
-use collab::core::collab::{default_client_id, CollabOptions};
+use collab::core::collab::{CollabOptions, default_client_id};
 use collab::core::origin::CollabOrigin;
 
 use collab::preclude::Collab;
-use collab_database::database::{timestamp, DatabaseData};
+use collab_database::database::{DatabaseData, timestamp};
 use collab_database::entity::CreateDatabaseParams;
 use collab_document::blocks::DocumentData;
 use collab_document::document::Document;
@@ -17,7 +17,7 @@ use serde_json::Value;
 use crate::document::parser::JsonToDocumentParser;
 use crate::document::util::{create_database_from_params, create_document_from_json};
 use crate::hierarchy_builder::{ViewBuilder, WorkspaceViewBuilder};
-use crate::{gen_view_id, TemplateData, TemplateObjectId, WorkspaceTemplate};
+use crate::{TemplateData, TemplateObjectId, WorkspaceTemplate, gen_view_id};
 
 // Template Folder Structure:
 // |-- General (space)
@@ -126,7 +126,7 @@ impl GettingStartedTemplate {
     let mut view_builder = view_builder
       .with_name("Getting started")
       .with_icon("🌟")
-      .with_extra(r#"{"font_layout":"normal","line_height_layout":"normal","cover":{"type":"gradient","value":"appflowy_them_color_gradient4"},"font":null}"#)
+      .with_extra(r#"{"font_layout":"normal","line_height_layout":"normal","cover":{"type":"gradient","value":"amrut_them_color_gradient4"},"font":null}"#)
       .with_view_id(getting_started_view_uuid);
 
     view_builder = view_builder

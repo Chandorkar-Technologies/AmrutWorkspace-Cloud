@@ -5,12 +5,9 @@ services:
     restart: on-failure
     image: nginx
     ports:
-      - ${NGINX_PORT:-80}:80   # Disable this if you are using TLS
-      - ${NGINX_TLS_PORT:-443}:443
+      - ${NGINX_PORT:-80}:80   # HTTP only - TLS disabled for local dev
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/ssl/certificate.crt:/etc/nginx/ssl/certificate.crt
-      - ./nginx/ssl/private_key.key:/etc/nginx/ssl/private_key.key
 
   # You do not need this if you have configured to use your own s3 file storage
   minio:
@@ -53,6 +50,8 @@ services:
 
   gotrue:
     restart: on-failure
+    ports:
+      - "9999:9999"
     depends_on:
       postgres:
         condition: service_healthy
@@ -159,12 +158,15 @@ services:
       # and rely on the whitelist + invitations to gate who can sign up.
       - SIGNUP_WHITELIST_ENABLED=${SIGNUP_WHITELIST_ENABLED:-false}
       - GUEST_INVITES_REQUIRE_ADMIN_APPROVAL=${GUEST_INVITES_REQUIRE_ADMIN_APPROVAL:-false}
+      - APPFLOWY_CORS_ALLOWED_ORIGIN=${APPFLOWY_CORS_ALLOWED_ORIGIN:-http://localhost}
     image: appflowyinc/appflowy_cloud:${APPFLOWY_CLOUD_VERSION:-latest}
     healthcheck:
-      test: "curl --fail http://127.0.0.1:8000/api/health || exit 1"
+      test: "curl --fail http://127.0.0.1:8000/health || exit 1"
       interval: 5s
       timeout: 5s
       retries: 12
+    ports:
+      - "8000:8000"
     depends_on:
       gotrue:
         condition: service_healthy
@@ -173,8 +175,10 @@ services:
     restart: on-failure
     image: appflowyinc/admin_frontend:${APPFLOWY_ADMIN_FRONTEND_VERSION:-latest}
     environment:
-      - APPFLOWY_GOTRUE_BASE_URL=${APPFLOWY_GOTRUE_BASE_URL:-http://gotrue:9999}
-      - APPFLOWY_BASE_URL=${APPFLOWY_BASE_URL:-http://appflowy_cloud:8000}
+      - ADMIN_FRONTEND_GOTRUE_URL=${APPFLOWY_GOTRUE_BASE_URL:-http://gotrue:9999}
+      - ADMIN_FRONTEND_APPFLOWY_CLOUD_URL=http://appflowy_cloud:8000
+      - ADMIN_FRONTEND_REDIS_URL=redis://redis:6379
+      - ADMIN_FRONTEND_PATH_PREFIX=/console
 
     depends_on:
       gotrue:
@@ -184,38 +188,21 @@ services:
 
   ai:
     restart: on-failure
-    image: appflowyinc/appflowy_ai:${APPFLOWY_AI_VERSION:-latest}
+    build:
+      context: ./scripts/ai_proxy
+      dockerfile: Dockerfile
     environment:
       - AI_SERVER_PORT=${AI_SERVER_PORT}
       - OPENAI_API_KEY=${AI_OPENAI_API_KEY}
       - OPENAI_API_BASE=${AI_OPENAI_API_BASE:-}
-      - DEFAULT_AI_MODEL=gpt-4.1-mini # Make sure the model is available in your OpenAI account
-      - DEFAULT_AI_COMPLETION_MODEL=gpt-4.1-mini # Make sure the model is available in your OpenAI account
-      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
-      - OPENAI_API_BASE=${AI_OPENAI_API_BASE:-}
-      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
-      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}
-      - APPFLOWY_S3_ACCESS_KEY=${APPFLOWY_S3_ACCESS_KEY}
-      - APPFLOWY_S3_SECRET_KEY=${APPFLOWY_S3_SECRET_KEY}
-      - APPFLOWY_S3_BUCKET=${APPFLOWY_S3_BUCKET}
-      - APPFLOWY_S3_REGION=${APPFLOWY_S3_REGION}
-      - AI_DATABASE_URL=${APPFLOWY_DATABASE_URL}
-      - AI_REDIS_URL=${APPFLOWY_REDIS_URI}
-      - AI_USE_MINIO=${APPFLOWY_S3_USE_MINIO}
-      - AI_MINIO_URL=${APPFLOWY_S3_MINIO_URL}
-      - AI_APPFLOWY_HOST=${APPFLOWY_BASE_URL}
-      - APPFLOWY_GOTRUE_JWT_SECRET=${GOTRUE_JWT_SECRET}
+      - DEFAULT_AI_MODEL=${DEFAULT_AI_MODEL:-mistral-small-latest}
+      - DEFAULT_AI_COMPLETION_MODEL=${DEFAULT_AI_COMPLETION_MODEL:-mistral-small-latest}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5001/health" ]
-      interval: 30s
-      timeout: 10s
+      test: [ "CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:5001/health')\" || exit 1" ]
+      interval: 10s
+      timeout: 5s
       retries: 3
-      start_period: 40s
-    depends_on:
-      postgres:
-        condition: service_healthy
-      appflowy_cloud:
-        condition: service_healthy
+      start_period: 10s
 
   appflowy_worker:
     restart: on-failure
@@ -277,6 +264,10 @@ services:
   appflowy_web:
     restart: on-failure
     image: appflowyinc/appflowy_web:${APPFLOWY_WEB_VERSION:-latest}
+    # Removed volume mounts that override Docker's built-in dist with mismatched
+    # AppFlowy-Web source (557 commits ahead of cloud 0.15.16). Let the image
+    # serve its own matching frontend.
+    entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
     depends_on:
       appflowy_cloud:
         condition: service_healthy

@@ -1,12 +1,12 @@
 use handlebars::Handlebars;
-use lettre::message::header::ContentType;
-use lettre::message::Message;
-use lettre::transport::smtp::authentication::Credentials;
-use lettre::transport::smtp::client::Tls;
-use lettre::transport::smtp::client::TlsParameters;
 use lettre::Address;
 use lettre::AsyncSmtpTransport;
 use lettre::AsyncTransport;
+use lettre::message::Message;
+use lettre::message::header::ContentType;
+use lettre::transport::smtp::authentication::Credentials;
+use lettre::transport::smtp::client::Tls;
+use lettre::transport::smtp::client::TlsParameters;
 use secrecy::ExposeSecret;
 
 #[derive(Clone)]
@@ -77,7 +77,7 @@ impl Mailer {
     let rendered = self.handlers.render(template_name, &param)?;
     let email = Message::builder()
       .from(lettre::message::Mailbox::new(
-        Some("AppFlowy Notification".to_string()),
+        Some("Amrut Workspace Notification".to_string()),
         self.smtp_email.parse::<Address>()?,
       ))
       .to(lettre::message::Mailbox::new(
