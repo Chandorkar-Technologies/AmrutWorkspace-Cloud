@@ -10,7 +10,7 @@ use shared_entity::{
     RevokeSharedViewAccessRequest, ShareViewWithGuestRequest, SharedUser, SharedViewDetails,
     SharedViewDetailsRequest, SharedViews,
   },
-  dto::workspace_dto::CreateWorkspaceMember,
+  dto::workspace_dto::WorkspaceMemberInvitation,
   response::{AppResponse, AppResponseError, JsonAppResponse},
 };
 use sqlx::PgPool;
@@ -94,20 +94,24 @@ async fn put_shared_view_handler(
 
   let req = payload.into_inner();
   let role = access_level_to_role(&req.access_level);
-  let members: Vec<CreateWorkspaceMember> = req
+  let invitations: Vec<WorkspaceMemberInvitation> = req
     .emails
     .iter()
-    .map(|email| CreateWorkspaceMember {
+    .map(|email| WorkspaceMemberInvitation {
       email: email.clone(),
       role: role.clone(),
+      skip_email_send: false,
+      wait_email_send: true,
     })
     .collect();
 
-  workspace::ops::add_workspace_members_db_only(
+  workspace::ops::invite_workspace_members(
+    &state.mailer,
     &state.pg_pool,
     &user_uuid,
     &workspace_id,
-    members,
+    invitations,
+    &state.config.appflowy_web_url,
   )
   .await?;
 
